@@ -215,6 +215,8 @@ function keyPressed() {
 }
 
 // All your other code is above!
+
+// All your other code is above!
 window.setup = setup;
 
 window.draw = draw;
