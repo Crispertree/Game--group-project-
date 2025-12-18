@@ -213,3 +213,16 @@ function keyPressed() {
     gameState = "playing";
   }
 }
+
+// All your other code is above!
+window.setup = setup;
+
+window.draw = draw;
+
+window.addEventListener("click", function (event) {
+    mousePressed();
+});
+
+window.addEventListener("keydown", function (event) {
+    keyPressed();
+});
