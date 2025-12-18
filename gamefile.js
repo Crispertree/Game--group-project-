@@ -22,6 +22,27 @@ class Platform {
 
     this.xSpeed = random([-10, 1]) * 1; //hastighet/
     this.broken = false;
+// SETUP
+
+function setup() {
+  // den måste vara där
+  createCanvas(400, 600);
+  resetGame(); //anropar alla objekt, startar spelet
+}
+
+// PLATFORM CLASS
+
+class Platform {
+  constructor(x, y, type = "normal") {
+    //mall för alla platformar//
+    this.x = x;
+    this.y = y;
+    this.w = 90; //storlek
+    this.h = 5;
+    this.type = type;
+
+    this.xSpeed = 3; //hastighet
+    this.broken = false; // breaking platform
   }
 
   update() {
