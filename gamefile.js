@@ -1,19 +1,14 @@
-// Game states: "start", "playing", "gameover VARIABLER"
-
 //GLOBALA VARIABLER
 let gameState = "start";
-
 let player;
 let platforms = []; //array för platformar/ /
 let numPlatforms = 10;
-
 let platformGap = 60; // vertical spacing between platforms
 let maxSideOffset = 120; // controls horizontal distance between platforms
 
 // SETUP
 
 function setup() {
-  // den måste vara där
   createCanvas(400, 600);
   resetGame(); //anropar alla objekt, startar spelet
 }
@@ -43,10 +38,10 @@ class Platform {
       }
     }
 
-    this.y += 1; //XXXXXX kameran rör sig uppåt en bildruta per pixel, eller platformarna rör sig nedåt nåt utav det//
+    this.y += 1; //kameran rör sig uppåt en bildruta per pixel, eller platformarna rör sig nedåt nåt utav det//
 
     if (this.y > height) {
-      //XXXXXXXX platform åker ur bild, respawna på toppen
+      // platform åker ur bild, respawna på toppen
       this.respawnAbove();
     }
   }
@@ -70,7 +65,7 @@ class Platform {
     if (this.type === "normal") fill(255, 150, 200);
     if (this.type === "moving") fill(153, 153, 255);
     if (this.type === "breaking") fill(255, 102, 102);
-    rect(this.x, this.y, this.w, this.h, 10); //sista sifran rundade hörn//
+    rect(this.x, this.y, this.w, this.h, 10);
   }
 }
 
@@ -78,7 +73,7 @@ class Platform {
 
 class Player {
   constructor() {
-    this.x = width / 2; //startposition, hamnar på mitten,//
+    this.x = width / 2; //startposition, hamnar på mitten
     this.y = height - 50; //how high up it starts
     this.r = 10; //size of ball radie
     this.xSpeed = 0; //hastighet
@@ -95,7 +90,7 @@ class Player {
     else this.xSpeed = 0;
     this.x += this.xSpeed; //denna raden applicerar raderna ovanför
 
-    if (this.x < -this.r) this.x = width + this.r; //XXXXXX wrap around
+    if (this.x < -this.r) this.x = width + this.r; //wrap around
     if (this.x > width + this.r) this.x = -this.r;
 
     this.ySpeed += this.gravity;
@@ -115,7 +110,7 @@ class Player {
       ) {
         if (p.type === "breaking")
           p.broken = true; //om den är breaking, går sönder
-        else if (!p.broken) this.ySpeed = this.jumpForce; // annars hoppar
+        else if (!p.broken) this.ySpeed = this.jumpForce; // annars apply jump
       }
     }
     if (this.y > height + 50) gameState = "gameover";
@@ -123,7 +118,7 @@ class Player {
   //*
 
   show() {
-    fill(50); /*color of ball,*/
+    fill(50); //color of ball
     ellipse(this.x, this.y, this.r * 2);
   }
 }
