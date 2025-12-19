@@ -5,6 +5,7 @@ let platforms = []; //array för platformar/ /
 let numPlatforms = 10;
 let platformGap = 60; // vertical spacing between platforms
 let maxSideOffset = 120; // controls horizontal distance between platforms
+let cameraShift = 0;
 
 // SETUP
 
@@ -23,7 +24,6 @@ class Platform {
     this.w = 90; //storlek
     this.h = 5;
     this.type = type;
-
     this.xSpeed = 3; //hastighet
     this.broken = false; // breaking platform
   }
@@ -38,7 +38,7 @@ class Platform {
       }
     }
 
-    this.y += 1; //kameran rör sig uppåt en bildruta per pixel, eller platformarna rör sig nedåt nåt utav det//
+    this.y += cameraShift; //kameran rör sig uppåt en bildruta per pixel, eller platformarna rör sig nedåt nåt utav det//
 
     if (this.y > height) {
       // platform åker ur bild, respawna på toppen
@@ -60,7 +60,6 @@ class Platform {
 
   show() {
     //platformar utseende//
-    // if (this.broken) return;
     noStroke();
     if (this.type === "normal") fill(255, 150, 200);
     if (this.type === "moving") fill(153, 153, 255);
@@ -95,6 +94,15 @@ class Player {
 
     this.ySpeed += this.gravity;
     this.y += this.ySpeed; //this.y ändras hela tiden pga bollen rör sig
+
+    //KAMERA
+    cameraShift = 0;
+    let anchor = height * 0.4;
+
+    if (this.y < anchor && this.ySpeed < 0) {
+      cameraShift = anchor - this.y;
+      this.y = anchor;
+    }
 
     //kollision
 
